@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Onest:wght@400;500;600&display=swap");
+
+/* ===== Цвета и шрифты (те же, что на главной) ===== */
+:root {
+    --turf: #1f6b3a;
+    --turf-dark: #14472a;
+    --chalk: #f5f7f2;
+    --lamp: #f2b632;
+    --ink: #0e2433;
+    --grey: #5b6b73;
+    --line: #dfe5da;
+
+    --font-title: "Oswald", "Arial Narrow", sans-serif;
+    --font-text: "Onest", "Segoe UI", Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== Фон: поле с полосами газона и центральным кругом ===== */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    font-family: var(--font-text);
+    color: var(--ink);
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--turf) 0,
+        var(--turf) 90px,
+        #247a43 90px,
+        #247a43 180px
+    );
+}
+
+/* центральная линия */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.45);
+    transform: translateX(-50%);
+}
+
+/* центральный круг */
+body::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 520px;
+    height: 520px;
+    border: 4px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ===== Заголовок ===== */
+h1 {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-title);
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--chalk);
+    margin-bottom: 24px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Форма-карточка ===== */
+form {
+    position: relative;
+    z-index: 1;
+    width: min(420px, 100%);
+    padding: 32px 28px 28px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 6px solid var(--lamp);
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(14, 36, 51, 0.3);
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--chalk);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+input::placeholder {
+    color: var(--grey);
+}
+
+input:hover {
+    border-color: var(--grey);
+}
+
+input:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--turf);
+    box-shadow: 0 0 0 3px rgba(31, 107, 58, 0.2);
+}
+
+/* ===== Кнопка ===== */
+button {
+    width: 100%;
+    margin-top: 4px;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--lamp);
+    border: 2px solid var(--lamp);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: #ffc94d;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+:focus-visible {
+    outline: 3px solid var(--lamp);
+    outline-offset: 3px;
+}
+
+/* ===== Телефоны ===== */
+@media (max-width: 720px) {
+    body::after {
+        width: 340px;
+        height: 340px;
+    }
+
+    form {
+        padding: 26px 20px 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

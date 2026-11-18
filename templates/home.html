@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Аренда футбольных стадионов</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">СТАДИОН-АРЕНДА</a>
+            <nav class="nav">
+                <a href="#stadiums">Стадионы</a>
+                <a href="#how">Как арендовать</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <section class="hero">
+        <div class="container">
+            <h1>Арендуй стадион для своего матча</h1>
+            <p>Выбери поле, дату и время. Футбольные стадионы с натуральным и искусственным газоном, освещением и раздевалками.</p>
+            <a href="#stadiums" class="btn btn-main">Выбрать стадион</a>
+            <a href="#how" class="btn btn-ghost">Как это работает</a>
+        </div>
+    </section>
+
+
+    <section class="stats">
+        <div class="container">
+            <div><strong>12</strong><span>стадионов в городе</span></div>
+            <div><strong>от 150 сомони</strong><span>за час аренды</span></div>
+            <div><strong>7:00–23:00</strong><span>работаем каждый день</span></div>
+        </div>
+    </section>
+
+
+    <section class="section" id="stadiums">
+        <div class="container">
+            <h2 class="section-title">Доступные стадионы</h2>
+            <p class="section-sub">Выбери подходящее поле и нажми «Забронировать».</p>
+
+            <div class="cards">
+                <article class="card">
+                    <div class="card-top"></div>
+                    <div class="card-body">
+                        <h3>Центральный</h3>
+                        <p class="city">Душанбе</p>
+                        <ul class="tags">
+                            <li>Натуральный газон</li>
+                            <li>Освещение</li>
+                            <li>Раздевалки</li>
+                        </ul>
+                        <div class="card-bottom">
+                            <div class="price">400 <small>сомони / час</small></div>
+                            <a href="#">Забронировать</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-top"></div>
+                    <div class="card-body">
+                        <h3>Арена Юность</h3>
+                        <p class="city">Душанбе</p>
+                        <ul class="tags">
+                            <li>Искусственный газон</li>
+                            <li>Освещение</li>
+                            <li>Парковка</li>
+                        </ul>
+                        <div class="card-bottom">
+                            <div class="price">250 <small>сомони / час</small></div>
+                            <a href="#">Забронировать</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-top"></div>
+                    <div class="card-body">
+                        <h3>Малое поле 7x7</h3>
+                        <p class="city">Душанбе</p>
+                        <ul class="tags">
+                            <li>Искусственный газон</li>
+                            <li>Душ</li>
+                            <li>Трибуна</li>
+                        </ul>
+                        <div class="card-bottom">
+                            <div class="price">150 <small>сомони / час</small></div>
+                            <a href="#">Забронировать</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section steps-bg" id="how">
+        <div class="container">
+            <h2 class="section-title">Как арендовать</h2>
+            <p class="section-sub">Четыре шага от выбора до игры.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <h3>Выбери стадион</h3>
+                    <p>Посмотри размер поля, покрытие и цену за час.</p>
+                </div>
+                <div class="step">
+                    <h3>Укажи дату и время</h3>
+                    <p>Выбери свободный слот в календаре.</p>
+                </div>
+                <div class="step">
+                    <h3>Подтверди бронь</h3>
+                    <p>Оставь имя и телефон, мы свяжемся с тобой.</p>
+                </div>
+                <div class="step">
+                    <h3>Приходи играть</h3>
+                    <p>Поле, свет и раздевалки будут готовы к началу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cta" id="contacts">
+        <div class="container">
+            <h2>Свободные даты на этой неделе</h2>
+            <p>Забронируй поле для тренировки, турнира или игры с друзьями.</p>
+            <a href="#stadiums" class="btn btn-main">Забронировать стадион</a>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            © 2026 Стадион-Аренда. Все права защищены.
+        </div>
+    </footer>
+
+</body>
+</html>
