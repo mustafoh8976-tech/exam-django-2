@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Стадион-Аренда{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="{% url 'home' %}" class="logo">СТАДИОН-АРЕНДА</a>
+            <nav class="nav">
+                <a href="{% url 'home' %}">Главная</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'stadions' %}">Поля</a>
+                    <a href="{% url 'play_together' %}">Играем вместе</a>
+                    <a href="{% url 'my_orders' %}">Мои поля</a>
+                    <a href="{% url 'profile' %}">Профиль</a>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-btn">Выход</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Вход</a>
+                    <a href="{% url 'register' %}" class="nav-cta">Регистрация</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="footer"><div class="container">© 2026 Стадион-Аренда. Все права защищены.</div></footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Редактирование профиля{% endblock %}
+{% block content %}
+<section class="section"><div class="container"><div class="auth-box">
+    <h1 class="section-title">Редактирование профиля</h1>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        <div class="form-row"><label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required></div>
+        <div class="form-row"><label for="phone">Телефон</label>
+            <input type="text" id="phone" name="phone" value="{{ user.phone }}" maxlength="13"></div>
+        <div class="form-row"><label for="about">О себе</label>
+            <textarea id="about" name="about" rows="4">{{ user.about }}</textarea></div>
+        <div class="form-row"><label for="photo">Фото</label>
+            <input type="file" id="photo" name="photo" accept="image/*"></div>
+        <button type="submit" class="btn btn-main">Сохранить</button>
+        <a href="{% url 'profile' %}" class="back">Отмена</a>
+    </form>
+</div></div></section>
+{% endblock %}

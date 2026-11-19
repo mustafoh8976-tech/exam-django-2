@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Удаление поля{% endblock %}
+{% block content %}
+<section class="section"><div class="container"><div class="auth-box">
+    <h1 class="section-title">Удалить поле «{{ stadion.name_s }}»?</h1>
+    <p class="section-sub">Вместе с полем удалятся и все его заказы.</p>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-small">Да, удалить</button>
+        <a href="{% url 'stadion_detail' stadion.pk %}" class="back">Отмена</a>
+    </form>
+</div></div></section>
+{% endblock %}

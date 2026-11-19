@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ stadion.name_s }}{% endblock %}
+{% block content %}
+<section class="section"><div class="container detail">
+    {% if stadion.photo_s %}<img class="detail-photo" src="{{ stadion.photo_s.url }}" alt="{{ stadion.name_s }}">
+    {% else %}<div class="detail-photo card-top"></div>{% endif %}
+    <div class="detail-info">
+        <h1 class="section-title">{{ stadion.name_s }}</h1>
+        {% if error %}<p class="err">{{ error }}</p>{% endif %}
+        <p class="city">{{ stadion.addres }}</p>
+        <ul class="tags">
+            <li>{{ stadion.category.name_c }}</li>
+            {% if stadion.is_free %}<li class="free">Свободно</li>{% else %}<li class="busy">Занято</li>{% endif %}
+        </ul>
+        <p class="desc">{{ stadion.disc }}</p>
+        <p class="price">{{ stadion.price }} <small>сомони за одну игру</small></p>
+        {% if stadion.is_free %}<a href="{% url 'order_create' stadion.pk %}" class="btn btn-main">Заказать</a>{% endif %}
+        <a href="{% url 'stadion_edit' stadion.pk %}" class="btn btn-small">Изменить</a>
+        <a href="{% url 'stadion_delete' stadion.pk %}" class="btn btn-danger btn-small">Удалить</a>
+        <a href="{% url 'stadions' %}" class="back">← К каталогу</a>
+    </div>
+</div></section>
+{% endblock %}

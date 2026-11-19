@@ -176,3 +176,33 @@ button:active {
         transition: none !important;
     }
 }
+
+
+/* ===== Дополнения для Django: сообщения, ссылки ===== */
+.flash, .error {
+    position: relative;
+    z-index: 1;
+    width: min(420px, 100%);
+    margin-bottom: 14px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid var(--line);
+}
+
+.error { color: #8a1f1f; background: #fbeaea; border-color: #e3a6a6; }
+.flash-success { color: #14472a; background: #e8f5ec; border-color: #9fd3b0; }
+.flash-info, .flash-warning { background: #fdf6e0; border-color: #ecd18a; }
+
+.auth-links {
+    position: relative;
+    z-index: 1;
+    margin-top: 18px;
+    text-align: center;
+    color: var(--chalk);
+}
+
+.auth-links a { font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+
+input[type="file"] { padding: 9px 12px; }

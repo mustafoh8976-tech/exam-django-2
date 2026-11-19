@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Заказ №{{ order.pk }}{% endblock %}
+{% block content %}
+<section class="section"><div class="container">
+    <h1 class="section-title">Заказ №{{ order.pk }}</h1>
+    <div class="panel">
+        <p><b>Поле:</b> <a href="{% url 'stadion_detail' order.stadion.pk %}">{{ order.stadion.name_s }}</a> ({{ order.stadion.category.name_c }})</p>
+        <p><b>Адрес:</b> {{ order.stadion.addres }}</p>
+        <p><b>Цена:</b> {{ order.stadion.price }} сомони</p>
+        <p><b>Статус:</b>
+            {% if order.status == "active" %}<span class="status status-active">Активен</span>
+            {% elif order.status == "completed" %}<span class="status status-completed">Завершён</span>
+            {% else %}<span class="status status-cancelled">Отменён</span>{% endif %}
+        </p>
+        <p><b>Команда:</b> {% if order.has_team %}есть{% else %}нет, не хватает игроков: {{ order.playrs_need }}{% endif %}</p>
+
+        {% if not order.has_team %}
+        <h3>Участники</h3>
+        <ul class="plain">
+            {% for p in players %}
+                <li><a href="{% url 'user_profile' p.user.pk %}">{{ p.user.username }}</a></li>
+            {% empty %}
+                <li>Пока никто не вступил</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="actions">
+            {% if order.status == "active" %}
+                <a href="{% url 'order_edit' order.pk %}" class="btn btn-outline btn-small">Изменить</a>
+                <form method="post" action="{% url 'order_finish' order.pk %}" class="inline">{% csrf_token %}
+                    <button type="submit" class="btn btn-main btn-small">Завершить</button>
+                </form>
+                <form method="post" action="{% url 'order_cancel' order.pk %}" class="inline">{% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-small">Отменить</button>
+                </form>
+            {% endif %}
+            <a href="{% url 'order_delete' order.pk %}" class="btn btn-danger btn-small">Удалить</a>
+        </div>
+        <a href="{% url 'my_orders' %}" class="back">← Мои поля</a>
+    </div>
+</div></section>
+{% endblock %}

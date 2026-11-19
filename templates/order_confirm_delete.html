@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Удаление заказа{% endblock %}
+{% block content %}
+<section class="section"><div class="container"><div class="auth-box">
+    <h1 class="section-title">Удалить заказ №{{ order.pk }}?</h1>
+    <p class="section-sub">Поле «{{ order.stadion.name_s }}».
+        {% if order.status == "active" %}Заказ активен, после удаления поле снова станет свободным.{% endif %}</p>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-small">Да, удалить</button>
+        <a href="{% url 'my_orders' %}" class="back">Отмена</a>
+    </form>
+</div></div></section>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +9,30 @@
 </head>
 <body>
     <h1>Регистрация</h1>
-    <form>
+
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
         <label for="username">Имя пользователя:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" value="{{ username }}" required>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="{{ email }}" required>
 
         <label for="password">Пароль:</label>
         <input type="password" id="password" name="password" required>
 
+        <label for="password2">Повторите пароль:</label>
+        <input type="password" id="password2" name="password2" required>
+
+        <label for="photo">Фото (по желанию):</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+
         <button type="submit">Зарегистрироваться</button>
     </form>
+
+    <p class="auth-links">Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a> · <a href="{% url 'home' %}">На главную</a></p>
 </body>
 </html>

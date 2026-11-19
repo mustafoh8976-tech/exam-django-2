@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{% if order %}Изменить заказ{% else %}Заказ поля{% endif %}{% endblock %}
+{% block content %}
+<section class="section"><div class="container"><div class="auth-box">
+    <h1 class="section-title">{% if order %}Заказ №{{ order.pk }}{% else %}Заказ{% endif %}: {{ stadion.name_s }}</h1>
+    <p class="section-sub">{{ stadion.category.name_c }} · {{ stadion.price }} сомони за игру</p>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-row radios">
+            <label>Есть ли у вас команда?</label>
+            <label><input type="radio" name="has_team" value="yes" {% if has_team == "yes" %}checked{% endif %}> Да</label>
+            <label><input type="radio" name="has_team" value="no" {% if has_team == "no" %}checked{% endif %}> Нет</label>
+        </div>
+
+        <div class="form-row" id="players-row">
+            <label for="playrs_need">Сколько игроков не хватает?</label>
+            <input type="number" id="playrs_need" name="playrs_need" min="1" value="{{ playrs_need|default:'' }}">
+        </div>
+
+        <button type="submit" class="btn btn-main">{% if order %}Сохранить{% else %}Заказать поле{% endif %}</button>
+        {% if order %}<a href="{% url 'order_detail' order.pk %}" class="back">Отмена</a>
+        {% else %}<a href="{% url 'stadion_detail' stadion.pk %}" class="back">Отмена</a>{% endif %}
+    </form>
+</div></div></section>
+
+<script>
+    // поле «Сколько игроков не хватает» показываем только при ответе «Нет»
+    var row = document.getElementById('players-row');
+    function show() {
+        var checked = document.querySelector('input[name=has_team]:checked');
+        row.style.display = (checked && checked.value === 'no') ? 'block' : 'none';
+    }
+    var radios = document.querySelectorAll('input[name=has_team]');
+    for (var i = 0; i < radios.length; i++) { radios[i].addEventListener('change', show); }
+    show();
+</script>
+{% endblock %}

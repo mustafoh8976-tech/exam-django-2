@@ -1,148 +1,70 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Аренда футбольных стадионов</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Аренда футбольных полей{% endblock %}
 
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Арендуй поле для своего матча</h1>
+        <p>Закажи поле целиком, сыграй и нажми «Завершить». Нет команды или не хватает игроков? Найди их среди других пользователей.</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'stadions' %}" class="btn btn-main">Выбрать поле</a>
+            <a href="{% url 'play_together' %}" class="btn btn-ghost">Играем вместе</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="btn btn-main">Зарегистрироваться</a>
+            <a href="{% url 'login' %}" class="btn btn-ghost">Войти</a>
+        {% endif %}
+    </div>
+</section>
 
-    <header class="header">
-        <div class="container">
-            <a href="#" class="logo">СТАДИОН-АРЕНДА</a>
-            <nav class="nav">
-                <a href="#stadiums">Стадионы</a>
-                <a href="#how">Как арендовать</a>
-                <a href="#contacts">Контакты</a>
-            </nav>
-        </div>
-    </header>
-
-
-    <section class="hero">
-        <div class="container">
-            <h1>Арендуй стадион для своего матча</h1>
-            <p>Выбери поле, дату и время. Футбольные стадионы с натуральным и искусственным газоном, освещением и раздевалками.</p>
-            <a href="#stadiums" class="btn btn-main">Выбрать стадион</a>
-            <a href="#how" class="btn btn-ghost">Как это работает</a>
-        </div>
-    </section>
-
-
-    <section class="stats">
-        <div class="container">
-            <div><strong>12</strong><span>стадионов в городе</span></div>
-            <div><strong>от 150 сомони</strong><span>за час аренды</span></div>
-            <div><strong>7:00–23:00</strong><span>работаем каждый день</span></div>
-        </div>
-    </section>
-
-
-    <section class="section" id="stadiums">
-        <div class="container">
-            <h2 class="section-title">Доступные стадионы</h2>
-            <p class="section-sub">Выбери подходящее поле и нажми «Забронировать».</p>
-
-            <div class="cards">
-                <article class="card">
-                    <div class="card-top"></div>
-                    <div class="card-body">
-                        <h3>Центральный</h3>
-                        <p class="city">Душанбе</p>
-                        <ul class="tags">
-                            <li>Натуральный газон</li>
-                            <li>Освещение</li>
-                            <li>Раздевалки</li>
-                        </ul>
-                        <div class="card-bottom">
-                            <div class="price">400 <small>сомони / час</small></div>
-                            <a href="#">Забронировать</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="card-top"></div>
-                    <div class="card-body">
-                        <h3>Арена Юность</h3>
-                        <p class="city">Душанбе</p>
-                        <ul class="tags">
-                            <li>Искусственный газон</li>
-                            <li>Освещение</li>
-                            <li>Парковка</li>
-                        </ul>
-                        <div class="card-bottom">
-                            <div class="price">250 <small>сомони / час</small></div>
-                            <a href="#">Забронировать</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="card-top"></div>
-                    <div class="card-body">
-                        <h3>Малое поле 7x7</h3>
-                        <p class="city">Душанбе</p>
-                        <ul class="tags">
-                            <li>Искусственный газон</li>
-                            <li>Душ</li>
-                            <li>Трибуна</li>
-                        </ul>
-                        <div class="card-bottom">
-                            <div class="price">150 <small>сомони / час</small></div>
-                            <a href="#">Забронировать</a>
-                        </div>
-                    </div>
-                </article>
+<section class="section" id="features">
+    <div class="container">
+        <h2 class="section-title">Что есть на сайте</h2>
+        <p class="section-sub">Все разделы открываются после регистрации и входа.</p>
+        <div class="features">
+            <div class="feature">
+                <h3>Каталог полей</h3>
+                <p>Поля форматов 11 на 11, 7 на 7 и 5 на 5 с фото, ценой и статусом «Свободно» или «Занято». Есть фильтр и поиск.</p>
+                <a href="{% url 'stadions' %}">Открыть каталог →</a>
+            </div>
+            <div class="feature">
+                <h3>Аренда поля</h3>
+                <p>Закажи поле одним нажатием. Укажи, есть ли у тебя команда, а если нет, сколько игроков не хватает.</p>
+                <a href="{% url 'my_orders' %}">Мои поля →</a>
+            </div>
+            <div class="feature">
+                <h3>Играем вместе</h3>
+                <p>Заказы, где организатору нужны игроки. Вступай в команду и играй, даже если пришёл один.</p>
+                <a href="{% url 'play_together' %}">Найти команду →</a>
+            </div>
+            <div class="feature">
+                <h3>Профиль</h3>
+                <p>Фото, контакты, информация о себе и количество твоих заказов. Профиль можно редактировать.</p>
+                <a href="{% url 'profile' %}">Мой профиль →</a>
             </div>
         </div>
-    </section>
+        {% if not user.is_authenticated %}
+            <p class="lock-note">🔒 Чтобы зайти в эти разделы, сначала <a href="{% url 'register' %}"><b>зарегистрируйтесь</b></a> или <a href="{% url 'login' %}"><b>войдите</b></a>.</p>
+        {% endif %}
+    </div>
+</section>
 
-
-    <section class="section steps-bg" id="how">
-        <div class="container">
-            <h2 class="section-title">Как арендовать</h2>
-            <p class="section-sub">Четыре шага от выбора до игры.</p>
-
-            <div class="steps">
-                <div class="step">
-                    <h3>Выбери стадион</h3>
-                    <p>Посмотри размер поля, покрытие и цену за час.</p>
-                </div>
-                <div class="step">
-                    <h3>Укажи дату и время</h3>
-                    <p>Выбери свободный слот в календаре.</p>
-                </div>
-                <div class="step">
-                    <h3>Подтверди бронь</h3>
-                    <p>Оставь имя и телефон, мы свяжемся с тобой.</p>
-                </div>
-                <div class="step">
-                    <h3>Приходи играть</h3>
-                    <p>Поле, свет и раздевалки будут готовы к началу.</p>
-                </div>
-            </div>
+<section class="section steps-bg" id="how">
+    <div class="container">
+        <h2 class="section-title">Как заказать поле</h2>
+        <p class="section-sub">Четыре простых шага.</p>
+        <div class="steps">
+            <div class="step"><h3>Зарегистрируйся</h3><p>Создай аккаунт и войди на сайт.</p></div>
+            <div class="step"><h3>Выбери поле</h3><p>Найди подходящее поле в каталоге.</p></div>
+            <div class="step"><h3>Закажи</h3><p>Поле станет «Занято», пока ты не закончишь игру.</p></div>
+            <div class="step"><h3>Сыграй и заверши</h3><p>После матча нажми «Завершить», и поле снова свободно.</p></div>
         </div>
-    </section>
+    </div>
+</section>
 
-
-    <section class="cta" id="contacts">
-        <div class="container">
-            <h2>Свободные даты на этой неделе</h2>
-            <p>Забронируй поле для тренировки, турнира или игры с друзьями.</p>
-            <a href="#stadiums" class="btn btn-main">Забронировать стадион</a>
-        </div>
-    </section>
-
-
-    <footer class="footer">
-        <div class="container">
-            © 2026 Стадион-Аренда. Все права защищены.
-        </div>
-    </footer>
-
-</body>
-</html>
+<section class="section" id="team">
+    <div class="container">
+        <h2 class="section-title">Как играть командой</h2>
+        <p class="section-sub">Если у тебя нет команды, укажи это при заказе. Твой заказ появится на странице «Играем вместе», и другие пользователи смогут в него вступить. Когда нужное число игроков наберётся, вступление закроется.</p>
+    </div>
+</section>
+{% endblock %}

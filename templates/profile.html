@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Профиль {{ profile_user.username }}{% endblock %}
+{% block content %}
+<section class="section"><div class="container">
+    <div class="panel profile">
+        {% if profile_user.photo %}<img class="avatar" src="{{ profile_user.photo.url }}" alt="">
+        {% else %}<div class="avatar avatar-empty">{{ profile_user.username|first|upper }}</div>{% endif %}
+        <div>
+            <h1 class="section-title">{{ profile_user.username }}</h1>
+            <p><b>Email:</b> {{ profile_user.email }}</p>
+            <p><b>Телефон:</b> {{ profile_user.phone|default:"не указан" }}</p>
+            <p><b>О себе:</b> {{ profile_user.about|default:"не указано" }}</p>
+            <p><b>Количество заказов:</b> {{ orders|length }}</p>
+            {% if is_own %}<a href="{% url 'profile_edit' %}" class="btn btn-main btn-small">Редактировать</a>{% endif %}
+        </div>
+    </div>
+</div></section>
+{% endblock %}

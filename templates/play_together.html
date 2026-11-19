@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Играем вместе{% endblock %}
+{% block content %}
+<section class="section"><div class="container">
+    <h1 class="section-title">Играем вместе</h1>
+    <p class="section-sub">Заказы, где организатору не хватает игроков.</p>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+
+    {% if cards %}
+    <div class="cards">
+        {% for c in cards %}
+        <article class="card">
+            <div class="card-body">
+                <h3>{{ c.order.stadion.name_s }}</h3>
+                <p class="city">Организатор: <a href="{% url 'user_profile' c.order.user.pk %}">{{ c.order.user.username }}</a></p>
+                <ul class="tags">
+                    <li>Не хватает: {{ c.order.playrs_need }}</li>
+                    <li>Вступили: {{ c.players|length }}</li>
+                </ul>
+                <p class="who">Уже в команде:
+                    {% for p in c.players %}
+                        {% if c.is_own %}<a href="{% url 'user_profile' p.user.pk %}">{{ p.user.username }}</a>{% else %}{{ p.user.username }}{% endif %}{% if not forloop.last %}, {% endif %}
+                    {% empty %}пока никого{% endfor %}
+                </p>
+                <div class="card-bottom">
+                    {% if c.is_own %}
+                        <span class="hint">Ваш заказ</span>
+                    {% elif c.joined %}
+                        <form method="post" action="{% url 'leave_order' c.order.pk %}">{% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-small">Выйти из команды</button>
+                        </form>
+                    {% elif c.is_full %}
+                        <span class="hint">Команда набрана</span>
+                    {% else %}
+                        <form method="post" action="{% url 'join_order' c.order.pk %}">{% csrf_token %}
+                            <button type="submit" class="btn btn-main btn-small">Вступить в команду</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}<p class="empty">Сейчас никто не ищет игроков.</p>{% endif %}
+</div></section>
+{% endblock %}

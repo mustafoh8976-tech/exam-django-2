@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Мои поля{% endblock %}
+{% block content %}
+<section class="section"><div class="container">
+    <h1 class="section-title">Мои поля</h1>
+
+    {% if active %}
+    <div class="rows">
+        {% for o in active %}
+        <div class="row-card">
+            <div>
+                <h3>{{ o.stadion.name_s }}</h3>
+                <p class="city">Заказ №{{ o.pk }} ·
+                    {% if o.has_team %}есть команда{% else %}не хватает игроков: {{ o.playrs_need }}{% endif %}</p>
+            </div>
+            <div class="actions">
+                <a href="{% url 'order_detail' o.pk %}" class="btn btn-outline btn-small">Посмотреть</a>
+                <a href="{% url 'order_edit' o.pk %}" class="btn btn-outline btn-small">Изменить</a>
+                <form method="post" action="{% url 'order_finish' o.pk %}" class="inline">{% csrf_token %}
+                    <button type="submit" class="btn btn-main btn-small">Завершить</button>
+                </form>
+                <form method="post" action="{% url 'order_cancel' o.pk %}" class="inline">{% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-small">Отменить</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}<p class="empty">Активных заказов нет. <a href="{% url 'stadions' %}">Выбрать поле</a></p>{% endif %}
+
+    <h2 class="section-title sub">История</h2>
+    {% if history %}
+    <div class="rows">
+        {% for o in history %}
+        <div class="row-card">
+            <div>
+                <h3>{{ o.stadion.name_s }}</h3>
+                <p class="city">Заказ №{{ o.pk }}</p>
+            </div>
+            <div class="actions">
+                {% if o.status == "completed" %}<span class="status status-completed">Завершён</span>
+                {% else %}<span class="status status-cancelled">Отменён</span>{% endif %}
+                <a href="{% url 'order_delete' o.pk %}" class="btn btn-danger btn-small">Удалить</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}<p class="empty">История пуста.</p>{% endif %}
+</div></section>
+{% endblock %}

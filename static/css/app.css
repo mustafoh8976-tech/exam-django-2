@@ -1,0 +1,125 @@
+/* Общие стили внутренних страниц. Палитра берётся из home.css (:root) */
+
+/* меню: показываем и на телефонах (в home.css оно скрыто) */
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; }
+.header .container { flex-wrap: wrap; gap: 10px; }
+.logout-form { display: inline; }
+.nav-btn {
+    background: none; border: 0; color: inherit; font: inherit; font-weight: 500;
+    cursor: pointer; opacity: 0.85;
+}
+.nav-btn:hover { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
+
+/* сообщения */
+.messages { margin-top: 20px; display: grid; gap: 10px; }
+.msg { padding: 12px 16px; border-radius: 8px; border: 1px solid var(--line); background: #fff; font-weight: 500; }
+.msg-success { border-color: #9fd3b0; background: #e8f5ec; color: #14472a; }
+.msg-error { border-color: #e3a6a6; background: #fbeaea; color: #8a1f1f; }
+.msg-info, .msg-warning { border-color: #ecd18a; background: #fdf6e0; }
+
+main { min-height: 60vh; }
+.section-title.sub { margin-top: 56px; }
+.empty { color: var(--grey); }
+.empty a, .hint a, .back { color: var(--turf); font-weight: 600; }
+.back { margin-left: 14px; }
+.hint { color: var(--grey); font-size: 15px; }
+
+/* кнопки */
+.btn-small { padding: 9px 18px; font-size: 15px; cursor: pointer; font-family: inherit; }
+.btn-danger { background: #fff; color: #a32626; border-color: #d98a8a; cursor: pointer; }
+.btn-danger:hover { background: #fbeaea; }
+.btn-outline { background: #fff; color: var(--turf); border-color: var(--turf); }
+.btn-outline:hover { background: var(--chalk); }
+button.btn-main { cursor: pointer; font-family: inherit; font-size: 16px; }
+
+/* формы */
+.auth-box { max-width: 460px; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 32px; }
+.form-row { margin-bottom: 18px; }
+.form-row label { display: block; font-weight: 600; margin-bottom: 6px; }
+.form input[type=text], .form input[type=email], .form input[type=password],
+.form input[type=number], .form textarea, .filter input, .filter select {
+    width: 100%; padding: 11px 14px; font: inherit; border: 1px solid var(--line);
+    border-radius: 6px; background: #fff; color: var(--ink);
+}
+.form input[type=file] { font: inherit; }
+.form ul { list-style: none; display: flex; gap: 22px; }
+.form ul label { font-weight: 500; display: inline; }
+.err { color: #a32626; font-size: 14px; margin-top: 6px; }
+
+/* фильтр каталога */
+.filter { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 24px 0 36px; }
+.filter select { width: 220px; }
+.filter input { width: 260px; }
+.reset { color: var(--grey); }
+
+/* карточки */
+.card-photo { width: 100%; height: 170px; object-fit: cover; display: block; }
+.tags li.free { background: #e8f5ec; border-color: #9fd3b0; color: #14472a; }
+.tags li.busy { background: #fbeaea; border-color: #e3a6a6; color: #8a1f1f; }
+.card .who { font-size: 15px; color: var(--grey); margin-bottom: 18px; }
+.card .who a { color: var(--turf); font-weight: 600; }
+.card-bottom button { cursor: pointer; }
+
+/* страница поля */
+.detail { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.detail-photo { width: 100%; height: 340px; object-fit: cover; border-radius: 10px; }
+.detail .city { color: var(--grey); margin-bottom: 14px; }
+.detail .desc { margin: 18px 0; }
+.detail .price { margin-bottom: 22px; display: block; }
+
+/* списки заказов */
+.rows { display: grid; gap: 14px; margin-top: 24px; }
+.row-card { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; }
+.row-card h3 { font-family: var(--font-title); font-size: 22px; }
+.row-card .city { color: var(--grey); font-size: 15px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+form.inline { display: inline; }
+.status { padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 600; border: 1px solid var(--line); }
+.status-active { background: #e8f5ec; color: #14472a; }
+.status-completed { background: #eef2f5; color: var(--ink); }
+.status-cancelled { background: #fbeaea; color: #8a1f1f; }
+
+/* панели и профиль */
+.panel { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 28px; display: grid; gap: 10px; }
+.panel h3 { font-family: var(--font-title); margin-top: 10px; }
+.panel a { color: var(--turf); font-weight: 600; }
+.panel .btn-main { color: var(--ink); width: fit-content; }
+.plain { list-style: none; display: grid; gap: 6px; }
+.profile { grid-template-columns: 160px 1fr; align-items: start; gap: 28px; }
+.avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; }
+.avatar-empty { display: flex; align-items: center; justify-content: center; background: var(--turf);
+    color: #fff; font-family: var(--font-title); font-size: 64px; }
+
+@media (max-width: 720px) {
+    .nav { display: flex; }
+    .detail, .profile { grid-template-columns: 1fr; }
+    .filter select, .filter input { width: 100%; }
+    .auth-box { padding: 22px; }
+}
+
+/* кнопка «Регистрация» в правом верхнем углу */
+.nav .nav-cta {
+    background: var(--lamp);
+    color: var(--ink);
+    font-weight: 600;
+    opacity: 1;
+    padding: 8px 18px;
+    border-radius: 6px;
+}
+.nav .nav-cta:hover { background: #ffc94d; text-decoration: none; }
+
+/* блок «Что есть на сайте» на главной */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+.feature { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 24px;
+    display: flex; flex-direction: column; gap: 10px; transition: transform 0.2s, box-shadow 0.2s; }
+.feature:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(14, 36, 51, 0.12); }
+.feature h3 { font-family: var(--font-title); font-size: 22px; }
+.feature p { color: var(--grey); flex: 1; }
+.feature a { color: var(--turf); font-weight: 600; }
+.lock-note { margin-top: 28px; color: var(--grey); }
+
+/* радиокнопки «Да / Нет» */
+.radios label { display: inline-block; font-weight: 500; margin-right: 22px; }
+.radios label:first-child { display: block; font-weight: 600; margin-bottom: 8px; }
+.radios input { width: auto; margin-right: 6px; }

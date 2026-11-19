@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{% if stadion %}Изменить поле{% else %}Новое поле{% endif %}{% endblock %}
+{% block content %}
+<section class="section"><div class="container"><div class="auth-box">
+    <h1 class="section-title">{% if stadion %}Изменить поле{% else %}Новое поле{% endif %}</h1>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <label for="name_s">Название</label>
+            <input type="text" id="name_s" name="name_s" value="{{ name_s|default:'' }}">
+        </div>
+
+        <div class="form-row">
+            <label for="addres">Адрес</label>
+            <input type="text" id="addres" name="addres" value="{{ addres|default:'' }}">
+        </div>
+
+        <div class="form-row">
+            <label for="disc">Описание</label>
+            <textarea id="disc" name="disc" rows="4">{{ disc|default:'' }}</textarea>
+        </div>
+
+        <div class="form-row">
+            <label for="category">Формат</label>
+            <select id="category" name="category">
+                <option value="">Выберите формат</option>
+                {% for c in categories %}
+                    <option value="{{ c.id }}" {% if c.id|stringformat:"s" == category %}selected{% endif %}>{{ c.name_c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="price">Цена (сомони за игру)</label>
+            <input type="text" id="price" name="price" value="{{ price|default:'' }}">
+        </div>
+
+        <div class="form-row">
+            <label for="photo_s">Фото</label>
+            <input type="file" id="photo_s" name="photo_s" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn btn-main">{% if stadion %}Сохранить{% else %}Добавить поле{% endif %}</button>
+        {% if stadion %}<a href="{% url 'stadion_detail' stadion.pk %}" class="back">Отмена</a>
+        {% else %}<a href="{% url 'stadions' %}" class="back">Отмена</a>{% endif %}
+    </form>
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Поля{% endblock %}
+{% block content %}
+<section class="section"><div class="container">
+    <h1 class="section-title">Каталог полей</h1>
+    <a href="{% url 'stadion_create' %}" class="btn btn-main btn-small">+ Добавить поле</a>
+
+    <form method="get" class="filter">
+        <select name="category">
+            <option value="">Все форматы</option>
+            {% for c in categories %}
+                <option value="{{ c.id }}" {% if c.id == category %}selected{% endif %}>{{ c.name_c }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="q" value="{{ q|default:'' }}" placeholder="Название или адрес">
+        <button type="submit" class="btn btn-main btn-small">Найти</button>
+        <a href="{% url 'stadions' %}" class="reset">Сбросить</a>
+    </form>
+
+    {% if stadions %}
+    <div class="cards">
+        {% for s in stadions %}
+        <article class="card">
+            {% if s.photo_s %}<img class="card-photo" src="{{ s.photo_s.url }}" alt="{{ s.name_s }}">
+            {% else %}<div class="card-top"></div>{% endif %}
+            <div class="card-body">
+                <h3>{{ s.name_s }}</h3>
+                <p class="city">{{ s.addres }}</p>
+                <ul class="tags">
+                    <li>{{ s.category.name_c }}</li>
+                    {% if s.is_free %}<li class="free">Свободно</li>{% else %}<li class="busy">Занято</li>{% endif %}
+                </ul>
+                <div class="card-bottom">
+                    <span class="price">{{ s.price }} <small>сомони / игра</small></span>
+                    <a href="{% url 'stadion_detail' s.pk %}">Открыть</a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}<p class="empty">Полей по вашему запросу не найдено.</p>{% endif %}
+</div></section>
+{% endblock %}

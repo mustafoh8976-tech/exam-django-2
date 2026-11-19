@@ -1,0 +1,8 @@
+{% for field in form %}
+<div class="form-row" {% if field.name == 'playrs_need' %}id="players-row"{% endif %}>
+    {{ field.label_tag }}
+    {{ field }}
+    {% for error in field.errors %}<p class="err">{{ error }}</p>{% endfor %}
+</div>
+{% endfor %}
+{% for error in form.non_field_errors %}<p class="err">{{ error }}</p>{% endfor %}
